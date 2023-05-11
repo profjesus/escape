@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Afirmaciones de matemáticas</title>
+    <style>
+        /* Estilo para los checkboxes personalizados */
+.custom-checkbox {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+  width: 22px;
+  height: 22px;
+}
+
+/* Estilo para el óvalo exterior */
+.custom-checkbox::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 22px;
+  height: 22px;
+  border-radius: 11px;
+  border: 2px solid #007aff; /* Cambia el color del borde aquí */
+}
+
+/* Estilo para el círculo interior */
+.custom-checkbox::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 18px;
+  height: 18px;
+  border-radius: 9px;
+  background-color: #007aff; /* Cambia el color de fondo aquí */
+  transform: translateX(0); /* Desplaza el círculo a la izquierda */
+  transition: transform 0.2s ease-in-out; /* Agrega una transición suave */
+}
+
+/* Estilo para el checkbox marcado */
+.custom-checkbox input:checked + span::after {
+  transform: translateX(14px); /* Desplaza el círculo a la derecha */
+}
+
+    </style>
+  </head>
+  <body>
+    <h1>Afirmaciones de matemáticas</h1>
+    <section id="afirmaciones">
+        <ul>
+            <li><input type="checkbox" class="custom-checkbox" id="afirmacion1"><label for="afirmacion1">2 + 2 = 4</label></li>
+            <li><input type="checkbox" id="afirmacion2"><label for="afirmacion2">El número áureo es aproximadamente 1,618</label></li>
+            <li><input type="checkbox" id="afirmacion3"><label for="afirmacion3">El área de un círculo es πr²</label></li>
+            <li><input type="checkbox" id="afirmacion4"><label for="afirmacion4">La derivada de la función cos(x) es -sin(x)</label></li>
+            <li><input type="checkbox" id="afirmacion5"><label for="afirmacion5">El teorema de Pitágoras se aplica solo a triángulos rectángulos</label></li>
+            <li><input type="checkbox" id="afirmacion6"><label for="afirmacion6">Los números irracionales no se pueden expresar como una fracción</label></li>
+            <li><input type="checkbox" id="afirmacion7"><label for="afirmacion7">El factorial de 0 es 1</label></li>
+            <li><input type="checkbox" id="afirmacion8"><label for="afirmacion8">El valor absoluto de -5 es 5</label></li>
+          </ul>          
+    </section>
+    <button id="comprobar">Comprobar</button>
+    <p id="resultado"></p>
+    <script>
+        const afirmaciones = document.querySelectorAll('input[type="checkbox"]');
+const botonComprobar = document.getElementById('comprobar');
+const resultado = document.getElementById('resultado');
+
+// Establece las respuestas correctas para cada afirmación
+afirmaciones[0].setAttribute('respuesta', 'true');
+afirmaciones[1].setAttribute('respuesta', 'true');
+afirmaciones[2].setAttribute('respuesta', 'true');
+afirmaciones[3].setAttribute('respuesta', 'false');
+afirmaciones[4].setAttribute('respuesta', 'false');
+afirmaciones[5].setAttribute('respuesta', 'true');
+afirmaciones[6].setAttribute('respuesta', 'true');
+afirmaciones[7].setAttribute('respuesta', 'true');
+
+botonComprobar.addEventListener('click', () => {
+  // Finge procesamiento durante 2 segundos
+  setTimeout(() => {
+    let errores = 0;
+    for (let i = 0; i < afirmaciones.length; i++) {
+      if (afirmaciones[i].checked !== (afirmaciones[i].getAttribute('respuesta') === 'true')) {
+        errores++;
+      }
+    }
+    if (errores === 0) {
+      resultado.textContent = '¡Todas las afirmaciones son correctas!';
+    } else if (errores < 5) {
+      resultado.textContent = `Tienes ${errores} errores. Inténtalo de nuevo.`;
+    } else {
+      resultado.textContent = `Tienes demasiados errores. Consulta a un profesor de matemáticas para más ayuda.`;
+      botonComprobar.disabled = true;
+      // Desactiva las casillas de verificación después de 5 intentos fallidos
+      for (let i = 0; i < afirmaciones.length; i++) {
+        afirmaciones[i].disabled = true;
+      }
+    }
+  }, 2000); // 2 segundos de espera
+});
+
+    </script>
+  </body>
+</html>
