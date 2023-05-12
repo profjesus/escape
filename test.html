@@ -3,19 +3,28 @@
   <head>
     <title>Verdadeiro ou falso?</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <style>
+      p {
+        margin-bottom: 0;
+      }
+
+      label {
+        margin-bottom: 10px;
+      }
+    </style>
   </head>
   <body>
     <h1>Afirmaciones de matemáticas</h1>
     <section id="afirmaciones">
         <ul>
-          <li class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" id="afirmacion0" onClick="cambiaCheck(0)"><span id="texto0">FALSO - </span><label for="afirmacion0">As ecuacións diofánticas inventáronse para contar elefantes na India no século VI</label></li>
-          <li class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" id="afirmacion1" onClick="cambiaCheck(1)"><span id="texto1">FALSO - </span><label for="afirmacion1">2 + 2 = 4</label></li>
-          <li class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" id="afirmacion2" onClick="cambiaCheck(2)"><span id="texto2">FALSO - </span><label for="afirmacion2">Existe un tipo de demostración matemática que se chama "porque o digo eu"</label></li>
-          <li class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" id="afirmacion3" onClick="cambiaCheck(3)"><span id="texto3">FALSO - </span><label for="afirmacion3">Existe un tipo de demostración matemática que se chama "por redución ao absurdo"</label></li>
-          <li class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" id="afirmacion4" onClick="cambiaCheck(4)"><span id="texto4">FALSO - </span><label for="afirmacion4">No ano 2000 ofrecéuse un millón de dólares a quen conseguise resolver algún dos 7 problemas especialmente complexos. De momento só se atopou a solución a 1</label></li>
-          <li class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" id="afirmacion5" onClick="cambiaCheck(5)"><span id="texto5">FALSO - </span><label for="afirmacion5">Gauss é coñecido como "O Príncipe das Matemáticas", pero na súa época chamábano "O Rei do Mambo"</label></li>
-          <li class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" id="afirmacion6" onClick="cambiaCheck(6)"><span id="texto6">FALSO - </span><label for="afirmacion6">A percepción humana é logarítmica. Isto quere dicir que un son o dobre de forte non o percibimos como o dobre de alto</label></li>
-          <li class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" id="afirmacion7" onClick="cambiaCheck(7)"><span id="texto7">FALSO - </span><label for="afirmacion7">Hai infinitos máis grandes ca outros</label></li>  
+          <li class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" id="afirmacion0" onClick="cambiaCheck(0)"><p id="texto0">FALSO</p><label for="afirmacion0">As ecuacións diofánticas inventáronse para contar elefantes na India no século VI</label></li>
+          <li class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" id="afirmacion1" onClick="cambiaCheck(1)"><p id="texto1">FALSO</p><label for="afirmacion1">2 + 2 = 4</label></li>
+          <li class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" id="afirmacion2" onClick="cambiaCheck(2)"><p id="texto2">FALSO</p><label for="afirmacion2">Existe un tipo de demostración matemática que se chama "porque o digo eu"</label></li>
+          <li class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" id="afirmacion3" onClick="cambiaCheck(3)"><p id="texto3">FALSO</p><label for="afirmacion3">Existe un tipo de demostración matemática que se chama "por redución ao absurdo"</label></li>
+          <li class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" id="afirmacion4" onClick="cambiaCheck(4)"><p id="texto4">FALSO</p><label for="afirmacion4">No ano 2000 ofrecéuse un millón de dólares a quen conseguise resolver algún dos 7 problemas especialmente complexos. De momento só se atopou a solución a 1</label></li>
+          <li class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" id="afirmacion5" onClick="cambiaCheck(5)"><p id="texto5">FALSO</p><label for="afirmacion5">Gauss é coñecido como "O Príncipe das Matemáticas", pero na súa época chamábano "O Rei do Mambo"</label></li>
+          <li class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" id="afirmacion6" onClick="cambiaCheck(6)"><p id="texto6">FALSO</p><label for="afirmacion6">A percepción humana é logarítmica. Isto quere dicir que un son o dobre de forte non o percibimos como o dobre de alto</label></li>
+          <li class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" id="afirmacion7" onClick="cambiaCheck(7)"><p id="texto7">FALSO</p><label for="afirmacion7">Hai infinitos máis grandes ca outros</label></li>  
         </ul>
     </section>
     <button type="button" class="btn btn-primary" id="comprobar">Comprobar</button><br>
@@ -51,7 +60,7 @@
 
       function cambiaCheck(indice) {
         const texto = document.getElementById("texto" + indice);
-        texto.innerText = afirmaciones[indice].checked ? "VERDADEIRO - " : "FALSO - ";
+        texto.innerText = afirmaciones[indice].checked ? "VERDADEIRO" : "FALSO";
       }
 
       let contador = 0;
