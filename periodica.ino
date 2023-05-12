@@ -36,8 +36,8 @@ int indice = 0;
 int indiceLed = 0;
 
 // Secuencia de cores
-int secuenciaRgb[11] = { AMARELO, MORADO, AZUL, BRANCO, NEGRO, AMARELO, VERDE, AMARELO, BRANCO, VERMELLO, MORADO };
-int secuenciaLed[10] = { AZUL, VERMELLO, NADA, AZUL, NADA, VERDE, AZUL, VERMELLO, NADA, VERMELLO };
+int secuenciaRgb[10] = { AMARELO, MORADO, AZUL, BRANCO, VERMELLO, AMARELO, NEGRO, BRANCO, VERDE, MORADO };
+int secuenciaLed[9] = { AZUL, VERMELLO, NADA, VERMELLO, AZUL, NADA, AZUL, VERDE, VERMELLO };
 
 void setup() {
   //Pin definitions
