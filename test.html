@@ -1,104 +1,85 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Afirmaciones de matemáticas</title>
-    <style>
-        /* Estilo para los checkboxes personalizados */
-.custom-checkbox {
-  position: relative;
-  display: inline-block;
-  vertical-align: middle;
-  margin-right: 10px;
-  width: 22px;
-  height: 22px;
-}
-
-/* Estilo para el óvalo exterior */
-.custom-checkbox::before {
-  content: "";
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 22px;
-  height: 22px;
-  border-radius: 11px;
-  border: 2px solid #007aff; /* Cambia el color del borde aquí */
-}
-
-/* Estilo para el círculo interior */
-.custom-checkbox::after {
-  content: "";
-  display: block;
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  width: 18px;
-  height: 18px;
-  border-radius: 9px;
-  background-color: #007aff; /* Cambia el color de fondo aquí */
-  transform: translateX(0); /* Desplaza el círculo a la izquierda */
-  transition: transform 0.2s ease-in-out; /* Agrega una transición suave */
-}
-
-/* Estilo para el checkbox marcado */
-.custom-checkbox input:checked + span::after {
-  transform: translateX(14px); /* Desplaza el círculo a la derecha */
-}
-
-    </style>
+    <title>Verdadeiro ou falso?</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
   </head>
   <body>
     <h1>Afirmaciones de matemáticas</h1>
     <section id="afirmaciones">
         <ul>
-            <li><input type="checkbox" class="custom-checkbox" id="afirmacion1"><label for="afirmacion1">2 + 2 = 4</label></li>
-            <li><input type="checkbox" id="afirmacion2"><label for="afirmacion2">El número áureo es aproximadamente 1,618</label></li>
-            <li><input type="checkbox" id="afirmacion3"><label for="afirmacion3">El área de un círculo es πr²</label></li>
-            <li><input type="checkbox" id="afirmacion4"><label for="afirmacion4">La derivada de la función cos(x) es -sin(x)</label></li>
-            <li><input type="checkbox" id="afirmacion5"><label for="afirmacion5">El teorema de Pitágoras se aplica solo a triángulos rectángulos</label></li>
-            <li><input type="checkbox" id="afirmacion6"><label for="afirmacion6">Los números irracionales no se pueden expresar como una fracción</label></li>
-            <li><input type="checkbox" id="afirmacion7"><label for="afirmacion7">El factorial de 0 es 1</label></li>
-            <li><input type="checkbox" id="afirmacion8"><label for="afirmacion8">El valor absoluto de -5 es 5</label></li>
-          </ul>          
+          <li class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" id="afirmacion0" onClick="cambiaCheck(0)"><span id="texto0">FALSO - </span><label for="afirmacion0">As ecuacións diofánticas inventáronse para contar elefantes na India no século VI</label></li>
+          <li class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" id="afirmacion1" onClick="cambiaCheck(1)"><span id="texto1">FALSO - </span><label for="afirmacion1">2 + 2 = 4</label></li>
+          <li class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" id="afirmacion2" onClick="cambiaCheck(2)"><span id="texto2">FALSO - </span><label for="afirmacion2">Existe un tipo de demostración matemática que se chama "porque o digo eu"</label></li>
+          <li class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" id="afirmacion3" onClick="cambiaCheck(3)"><span id="texto3">FALSO - </span><label for="afirmacion3">Existe un tipo de demostración matemática que se chama "por redución ao absurdo"</label></li>
+          <li class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" id="afirmacion4" onClick="cambiaCheck(4)"><span id="texto4">FALSO - </span><label for="afirmacion4">No ano 2000 ofrecéuse un millón de dólares a quen conseguise resolver algún dos 7 problemas especialmente complexos. De momento só se atopou a solución a 1</label></li>
+          <li class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" id="afirmacion5" onClick="cambiaCheck(5)"><span id="texto5">FALSO - </span><label for="afirmacion5">Gauss é coñecido como "O Príncipe das Matemáticas", pero na súa época chamábano "O Rei do Mambo"</label></li>
+          <li class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" id="afirmacion6" onClick="cambiaCheck(6)"><span id="texto6">FALSO - </span><label for="afirmacion6">A percepción humana é logarítmica. Isto quere dicir que un son o dobre de forte non o percibimos como o dobre de alto</label></li>
+          <li class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" id="afirmacion7" onClick="cambiaCheck(7)"><span id="texto7">FALSO - </span><label for="afirmacion7">Hai infinitos máis grandes ca outros</label></li>  
+        </ul>
     </section>
-    <button id="comprobar">Comprobar</button>
+    <button type="button" class="btn btn-primary" id="comprobar">Comprobar</button><br>
+    <div class="spinner-border" role="status" style="display: none;" id="roda">
+      <span class="visually-hidden">Loading...</span>
+    </div>
     <p id="resultado"></p>
     <script>
-        const afirmaciones = document.querySelectorAll('input[type="checkbox"]');
-const botonComprobar = document.getElementById('comprobar');
-const resultado = document.getElementById('resultado');
+      // Collemos o tempo da URL
+      const urlParams = (new URL(window.location.toLocaleString())).searchParams;
+      const tempoInicial = urlParams.t || 0;
+      const inicio = Date.now();
 
-// Establece las respuestas correctas para cada afirmación
-afirmaciones[0].setAttribute('respuesta', 'true');
-afirmaciones[1].setAttribute('respuesta', 'true');
-afirmaciones[2].setAttribute('respuesta', 'true');
-afirmaciones[3].setAttribute('respuesta', 'false');
-afirmaciones[4].setAttribute('respuesta', 'false');
-afirmaciones[5].setAttribute('respuesta', 'true');
-afirmaciones[6].setAttribute('respuesta', 'true');
-afirmaciones[7].setAttribute('respuesta', 'true');
+      const afirmaciones = document.querySelectorAll('input[type="checkbox"]');
+      const botonComprobar = document.getElementById('comprobar');
+      const resultado = document.getElementById('resultado');
+      const roda = document.getElementById("roda");
+
+      // Todo a falso por defecto:
+      for (let i = 0; i < afirmaciones.length; i++) {
+        afirmaciones[i].checked = false;
+      }
+
+      // Establece las respuestas correctas para cada afirmación
+      afirmaciones[0].setAttribute('respuesta', '');
+      afirmaciones[1].setAttribute('respuesta', 'true');
+      afirmaciones[2].setAttribute('respuesta', 'false');
+      afirmaciones[3].setAttribute('respuesta', 'true');
+      afirmaciones[4].setAttribute('respuesta', 'true');
+      afirmaciones[5].setAttribute('respuesta', 'false');
+      afirmaciones[6].setAttribute('respuesta', 'true');
+      afirmaciones[7].setAttribute('respuesta', 'true');
+
+      function cambiaCheck(indice) {
+        const texto = document.getElementById("texto" + indice);
+        texto.innerText = afirmaciones[indice].checked ? "VERDADEIRO - " : "FALSO - ";
+      }
+
+      let contador = 0;
 
 botonComprobar.addEventListener('click', () => {
   // Finge procesamiento durante 2 segundos
+  botonComprobar.setAttribute("disabled", true);
+  resultado.textContent = "";
+  roda.style.display = "block";
   setTimeout(() => {
+    botonComprobar.removeAttribute("disabled");
+    contador++;
     let errores = 0;
     for (let i = 0; i < afirmaciones.length; i++) {
       if (afirmaciones[i].checked !== (afirmaciones[i].getAttribute('respuesta') === 'true')) {
         errores++;
       }
     }
+    roda.style.display = "none";
     if (errores === 0) {
-      resultado.textContent = '¡Todas las afirmaciones son correctas!';
-    } else if (errores < 5) {
-      resultado.textContent = `Tienes ${errores} errores. Inténtalo de nuevo.`;
+      let tempo = (Date.now() - inicio)/1000;
+      tempo += tempoInicial;
+      const segundos = Math.round(tempo%60);
+      resultado.textContent = 'PARABÉNS! Rematáchedes o escape room matemático en ' + tempo + " segundos. Que son " + Math.floor(tempo/60) + ":" + (segundos < 10 ? "0"+segundos : segundos);
+    } else if (contador > 5) {
+      resultado.textContent = `Hai ${errores} erros, revisade as respostas`;
     } else {
-      resultado.textContent = `Tienes demasiados errores. Consulta a un profesor de matemáticas para más ayuda.`;
-      botonComprobar.disabled = true;
-      // Desactiva las casillas de verificación después de 5 intentos fallidos
-      for (let i = 0; i < afirmaciones.length; i++) {
-        afirmaciones[i].disabled = true;
-      }
+      resultado.textContent = `Hai un ou máis erros, revisade as respostas`;
     }
   }, 2000); // 2 segundos de espera
 });
