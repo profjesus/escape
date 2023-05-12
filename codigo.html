@@ -7,7 +7,7 @@
 <body>
 	<main class="container">
 	<h1 class="display-2" id="titulo">Descubre o código</h1>
-	<p id="texto">O número que buscas é o que corresponde co número cero. Se tocas nos botóns do 1 ao 9 verás que número lle corresponde a cada un deles</p>
+	<p class="fs-3" id="texto">O número que buscas é o que lle correspondería ao número cero. Tocando nos botóns podes saber que número lle corresponde aos números do 1 ao 9, intenta adiviñar o patrón para saber cal correspondería co 0.</p>
 
     <br>
 	<div class="container text-center">
@@ -29,7 +29,8 @@
 	</div>
 	<br>
 
-	<h1 class="display-4" id="resultado"></h1>
+	<h1 class="display-5" id="resultado"></h1>
+	<h1 class="display-5">O número para 0 é ---> ?</h1>
 
 	Idioma: <select class="form-select" aria-label="Default select example" onChange="cambiaIdioma(this.value)">
 		<option selected value="0">Galego</option>
@@ -42,13 +43,13 @@
         var idioma = 0;
 
 		var titulos = ["Descubre o código", "Descubre el código", "Find out the code", "Découvrez le code"];
-		var textos = ["O número que buscas é o que corresponde co número cero. Se tocas nos botóns do 1 ao 9 verás que número lle corresponde a cada un deles", 
-			"El número que buscas es el que corresponde con el número cero. Si tocas en los botones del 1 al 9 verás qué número le corresponde a cada uno de ellos",
-			"The number you are looking for is the one that corresponds to the number zero. If you touch the buttons from 1 to 9 you will see what number corresponds to each of them",
-			"Le nombre que vous recherchez est celui qui correspond au nombre zéro. Si vous touchez les boutons de 1 à 9, vous verrez quel numéro correspond à chacun d'eux"
+		var textos = ["O número que buscas é o que lle correspondería ao número cero. Tocando nos botóns podes saber que número lle corresponde aos números do 1 ao 9, intenta adiviñar o patrón para saber cal correspondería co 0.", 
+			"El número que buscas es el que le correspondería al número cero. Tocando los botones puedes saber qué número le corresponde a los números del 1 al 9, intenta adivinar el patrón para saber cuál correspondería con el 0.",
+			"The number you are looking for is the one that corresponds to the number zero. If you touch the buttons from 1 to 9 you will see what number corresponds to each of them.",
+			"Le nombre que vous recherchez est celui qui correspond au nombre zéro. Si vous touchez les boutons de 1 à 9, vous verrez quel numéro correspond à chacun d'eux."
 		];
 		var resultados1 = ["O número para ", "El número para ", "The number for ", "Le nombre pour "];
-		var resultados2 = [" é ", " es ", " is ", " est "];
+		var resultados2 = [" é ---> ", " es ---> ", " is ---> ", " est ---> "];
 
 		function cambiaIdioma(indice) {
 			idioma = indice;
