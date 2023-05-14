@@ -23,8 +23,23 @@
     }
 
     function comprobarPalabra() {
+      var letrasCodigo =['E','A','O','R','S','N','I','T','D','U','C','L','M','P','B','V'];
+      var caracteresHex = ['7','3','E','F','4','C','D','9','6','5','B','2','0','1','8','A'];
+
       var palabra = document.getElementById('palabra').value;
-      if (palabra.toLowerCase() === 'd1435c0l4rd45m4t3m4t1c45') {
+      palabra = palabra.toUpperCase();
+      // Tradución código->HEX
+      var cadeaHex = [];
+      for(let i=0; i<palabra.length; i++){
+          for(let j =0; j<letrasCodigo.length; j++){
+              if(palabra[i] === letrasCodigo[j]){
+                cadeaHex.push(caracteresHex[j]);
+              }
+          }
+      }
+      cadeaHex = cadeaHex.join("");
+      const numero = new Number("0x" + cadeaHex);
+      if (numero % 131071 === 0) {
         let tempo = Date.now() - inicio;
         let segundos = Math.round(tempo/1000);
         window.location.href = 'test.html?t=' + segundos;
