@@ -35,7 +35,7 @@
     <script>
       // Collemos o tempo da URL
       const urlParams = (new URL(window.location.toLocaleString())).searchParams;
-      const tempoInicial = urlParams.t || 0;
+      const tempoInicial = Number(urlParams.get('t')) || 0;
       const inicio = Date.now();
 
       const afirmaciones = document.querySelectorAll('input[type="checkbox"]');
